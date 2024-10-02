@@ -1,4 +1,4 @@
-name: Общий тест
+name: Тест
 
 on: [push]
 
@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -24,6 +24,7 @@ jobs:
       - name: Run server
         run: |
           docker run -d --name my-server ${{ secrets.DOCKER_USERNAME }}/my-server:latest
+          docker exec -it my-server /usr/bin/luajit start.lua
 
       - name: Wait for server to start
         run: |
@@ -31,7 +32,7 @@ jobs:
 
       - name: Check server status
         run: |
-          docker container ls -a --filter name=my-server
+          docker exec -it my-server /usr/bin/luajit start.lua
           if [ $? -eq 0 ]; then
             echo "Server started successfully"
             exit 0
@@ -42,9 +43,11 @@ jobs:
 
       - name: Set test status
         if: success()
-        run:
-          echo "Исправен" > /tmp/test-result
-        uses: actions/upload-artifact@v3
+        run: |
+          echo "Пройден" > /tmp/test-result
+        uses: actions/upload-artifact@v2
         with:
           name: test-result
           path: /tmp/test-result
+        env:
+          TEST_RESULT: "Пройден"
