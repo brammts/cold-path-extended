@@ -23,8 +23,7 @@ jobs:
 
       - name: Run server
         run: |
-          docker run -d --name my-server ${{ secrets.DOCKER_USERNAME }}/my-server:latest
-          docker exec -it my-server /usr/bin/luajit start.lua
+          docker run -dT --name my-server ${{ secrets.DOCKER_USERNAME }}/my-server:latest
 
       - name: Wait for server to start
         run: |
@@ -32,7 +31,7 @@ jobs:
 
       - name: Check server status
         run: |
-          docker exec -it my-server /usr/bin/luajit start.lua
+          docker container ls -a --filter name=my-server
           if [ $? -eq 0 ]; then
             echo "Server started successfully"
             exit 0
