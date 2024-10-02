@@ -1,0 +1,10 @@
+services:
+  coldpath:
+    build:
+      context: ./
+    image: coldpath
+    container_name: coldpath-extended
+    volumes:
+      - ./data:/data/
+    ports:
+      - 5555:5555

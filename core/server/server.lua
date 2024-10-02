@@ -25,7 +25,7 @@ local host_is_ready = false
 local tcp_server_require = require "defnet.tcp_server"
 local tcp_server = nil
 
-local plugin = require "modules.modules_manager.init"
+local plugin = require "core.server.plugins.plugins_manager"
 
 local clients_data = {}
 local clients_ready = {}
@@ -749,7 +749,7 @@ end
 
 function M.start(console)
 	server_state = "starting"
-	log("[Server] Server started. Console Mode: ", console)
+	log("Start server. Console mode: ", console)
 	clients_data = {}
 	clients_ready = {}
 	preferred_civs = {}
@@ -768,7 +768,7 @@ function M.start(console)
 		HOST_IS_PLAYER = true
 		HOST_CIVILIZATION = game_data.player_land
 	end
-	log("[Plugin] Plugins Initialization Started:")
+	log("Start plugin initialization")
 	local plugin_api = {
 		_is_player_host = HOST_IS_PLAYER,
 		_chat_function = M.chat,

@@ -1,7 +1,7 @@
 require "environment"
 
 local validate_scenario = require "scripts.validate_scenario"
-original_game_data = require "content.maps.euro.scenarios.std"
+original_game_data = require "scripts.scenarios.euro.std"
 game_data = deepcopy(original_game_data)
 
 debug_log("Start server:", true)
@@ -21,7 +21,7 @@ network.start(true)
 local ok, err = pcall(function()
 	while not server_is_off do
 		network.update()
-		sleep(0.05)
+		sleep(0.01)
 	end
 end)
 

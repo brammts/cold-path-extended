@@ -5,10 +5,38 @@ local M = {}
 -- kick_function(client, reason)
 
 local plugins_list = {
-	lands_manager = {
-		data = require "modules.lands_manager.init",
-		order = 1
-	}
+	system = {
+		data = require "core.server.plugins.system",
+		order = 3
+	},
+	permissions = {
+		data = require "core.server.plugins.permissions",
+		order = 4
+	},
+	chat = {
+		data = require "core.server.plugins.chat",
+		order = 5
+	},
+	--afk = {
+	--	data = require "core.server.plugins.afk",
+	--	order = 6
+	--},
+	--verifier = {
+		--data = require "core.server.plugins.verifier",
+		--order = 6
+	--},
+	essentials = {
+	 	--data = require "core.server.plugins.essentials",
+	 	order = 6
+	 },
+	--game_switch = {
+		--data = require "core.server.plugins.game_switch",
+		--order = 6
+	--},
+	--debug = {
+		--data = require "core.server.plugins.debug",
+		--order = 6
+	--},
 }
 
 local plugins_data = {}
@@ -100,6 +128,7 @@ function M.init(plugins_api)
 		kick_function = plugins_api._kick_function,
 		shutdown = plugins_api._shutdown
 	}
+	log("plugin", "Plugins initialization started")
 
 	local api = {
 		call_function = call_function,
@@ -115,6 +144,9 @@ function M.init(plugins_api)
 		next_turn = plugins_api._next,
 	}
 
+    if not plugins_data.HOST_IS_PLAYER then
+        load_custom_plugins()
+    end
     
 	for k, v in spairs(plugins_list, function(t,a,b)
 		return plugins_list[a].order < plugins_list[b].order
