@@ -1,6 +1,7 @@
 require "environment"
 
 local validate_scenario = require "scripts.validate_scenario"
+-- Some comment
 original_game_data = require "scripts.scenarios.euro.std"
 game_data = deepcopy(original_game_data)
 
