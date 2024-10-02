@@ -57,7 +57,7 @@ function M.log(...)
         print(text)
     end
     if config[message_type].file and mode == "standard" then
-        local file = io.open(message_type..".dat", "a")
+        local file = io.open("./logs/"..message_type..".dat", "a")
         if file then
             local text = "["..os.date("%c").."] |"..short_src..":"..line.."|"
             for i, v in ipairs(arg) do

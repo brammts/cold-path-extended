@@ -2,7 +2,7 @@ require "environment"
 
 local validate_scenario = require "scripts.validate_scenario"
 -- Some comment
-original_game_data = require "scripts.scenarios.euro.std"
+original_game_data = require "content.scenarios.europe_remastered.wwi"
 game_data = deepcopy(original_game_data)
 
 debug_log("Start server:", true)
@@ -27,7 +27,7 @@ local ok, err = pcall(function()
 end)
 
 if not ok then
-	local file = io.open("server_crash", "a")
+	local file = io.open("./logs/server_crash.dat", "a")
 	if file then
 		file:write(err.."\n")
 		file:close()

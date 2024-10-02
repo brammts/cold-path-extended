@@ -11,18 +11,7 @@ local set_server_state
 local get_data
 local start
 
-local scenarios = {
-	europe = {
-		millenium = require "scripts.scenarios.europe.millenium",
-		wwi = require "scripts.scenarios.europe.wwi",
-		great_northern_war = require "scripts.scenarios.europe.great_northern_war",
-		crimean_war = require "scripts.scenarios.europe.crimean_war",
-		modern_world = require "scripts.scenarios.europe.modern_world",
-	},
-	america = {
-		modern_world = require "scripts.scenarios.america.modern_world"
-	}
-}
+local scenarios = {}
 
 
 
@@ -196,7 +185,6 @@ function M.game_over(land, win)
 		print("Game data deepcopy")
 		original_game_data = scenarios[next_map][next_scenario]
 		game_data = deepcopy(original_game_data)
-		modify_game_data(game_data.id)
 		print("next map to nil")
 		next_map = nil
 		print("next scenario to nil")

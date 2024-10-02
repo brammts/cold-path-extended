@@ -1078,28 +1078,6 @@ end
 -- 	return text
 -- end
 
-function modify_game_data(game_data_id)
-	buildings_data = deepcopy(require "scripts.buildings_data")
-
-	-- debug_log("Modify before:", buildings_data)
-
-	local t = {
-		consequences = require "scripts.scenarios_modifiers.consequences",
-		lost = require "scripts.scenarios_modifiers.lost",
-	}
-	if t[game_data.id] and t[game_data.id].buildings_data then
-		for k, v in pairs(t[game_data.id].buildings_data) do
-			buildings_data[k] = lume.concat(buildings_data[k], t[game_data.id].buildings_data[k])
-		end
-	end
-
-	if t[game_data.id] and t[game_data.id].init then
-		t[game_data.id].init()
-	end
-
-	-- debug_log("Modify after:", buildings_data)
-end
-
 function get_temperature(land)
 	local s = 0
 	local n = 0

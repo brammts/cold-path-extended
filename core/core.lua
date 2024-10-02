@@ -4,9 +4,6 @@ local calc_functions = require "core.calc_functions"
 local relations = require "core.relations"
 local offers = require "core.offers"
 local event_system = require "core.event_system"
-local scenarios_modifiers = {
-	consequences = require "scripts.scenarios_modifiers.consequences"
-}
 
 local is_player
 local difficulty_list
@@ -200,9 +197,7 @@ function M.build(land, province, building_id)
 		end
 	end
 
-	if scenarios_modifiers[game_data.id] then
-		scenarios_modifiers[game_data.id].build(land, province, building_id)
-	end
+
 end
 
 function M.destroy(land, province, building_id)
@@ -222,9 +217,7 @@ function M.destroy(land, province, building_id)
 	game_data.provinces[province].b[building_id] = nil
 
 
-	if scenarios_modifiers[game_data.id] then
-		scenarios_modifiers[game_data.id].destroy(land, province, building_id)
-	end
+
 
 
 end

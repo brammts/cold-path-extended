@@ -4,11 +4,6 @@ local buildings_calc_functions = require "core.buildings_calc_functions"
 local relations = require "core.relations"
 local ideology = require "core.ideology"
 
-local scenarios_modifiers = {
-	consequences = require "scripts.scenarios_modifiers.consequences",
-	lost = require "scripts.scenarios_modifiers.lost",
-}
-
 local technology_bonuses_functions = {
 	money = function(land)
 		local b = 1
@@ -393,12 +388,6 @@ local function stabilize_population()
 	end
 end
 
-local function calc_scenarios_modifiers(game_end_callback)
-	if scenarios_modifiers[game_data.id] then
-		scenarios_modifiers[game_data.id].calc(game_end_callback)
-	end
-end
-
 local function calc_economy(is_player, difficulty_list)
 	for k, v in pairs(game_data.lands) do
 		v.economy = {
@@ -667,7 +656,6 @@ function M.calc_lands(game_end_callback, is_player, difficulty_list)
 	calc_trade()
 	calc_war_weariness()
 	stabilize_population()
-	calc_scenarios_modifiers(game_end_callback)
 	ideology.handle_defeat(game_end_callback)
 	calc_num_of_provinces()
 	calc_science()

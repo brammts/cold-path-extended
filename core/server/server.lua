@@ -768,7 +768,7 @@ function M.start(console)
 		-- end
 		tcp_server.stop()
 	end
-	tcp_server = tcp_server_require.create(server_settings.server_info.data.server_port, on_data, on_client_connected, on_client_disconnected)
+	tcp_server = tcp_server_require.create(server_settings.port, on_data, on_client_connected, on_client_disconnected)
 	tcp_server.start()
 	if console then
 		HOST_IS_PLAYER = false

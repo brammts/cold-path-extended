@@ -10,9 +10,7 @@ local balance_of_power = require "core.ai.balance_of_power"
 local buildings = require "core.ai.buildings"
 local difficulty
 
-local scenarios_modifiers = {
-	lost = require "scripts.scenarios_modifiers.lost"
-}
+
 
 -- Local table with previous offers data. To prevent the bot from spamming offers
 local sent_offers = {
@@ -264,9 +262,7 @@ local function calc_strategy(land)
 end
 
 local function calc_diplomacy(land)
-	if scenarios_modifiers[game_data.id] and scenarios_modifiers[game_data.id].blocked_diplomacy then
-		return
-	end
+
 	local offers_list = offers.get_offers(land)
 	for k, v in pairs(offers_list) do
 		-- print("Offer for land:", land, k, v)
@@ -371,13 +367,7 @@ local function calc_army(land)
 	if game_data.step == 0 then
 		return
 	end
-	if not scenarios_modifiers[game_data.id] or not scenarios_modifiers[game_data.id].only_move then
-		ai_utils.shell(land)
-		ai_utils.planes(land)
-		ai_utils.chemical(land)
-		ai_utils.tank(land)
-		ai_utils.nuclear(land)
-	end
+
 	difficulty.move_army(land)
 	ai_utils.return_army(land)
 	-- print("after:")
@@ -451,14 +441,10 @@ function M.handle()
 		for k, v in pairs(game_data.lands) do
 			if k ~= "Undeveloped_land" and not is_player_function(k)
 			and not v.defeated then
-				if scenarios_modifiers[game_data.id] and scenarios_modifiers[game_data.id].blocked_diplomacy then
-					calc_army(k)
-				else
-					calc_strategy(k)
-					calc_army(k)
-					calc_technology(k)
-					calc_skills(k)
-				end
+				calc_strategy(k)
+				calc_army(k)
+				calc_technology(k)
+				calc_skills(k)
 			end
 		end
 		for k, v in pairs(game_data.lands) do
