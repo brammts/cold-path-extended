@@ -37,10 +37,10 @@ local function get_server_info()
 		type = "server_info",
 		data = {
 			name = server_settings.name,
-			players = server_settings.players,
+			players = 1,
 			ip = "",
 			port = server_settings.port,
-			size = 1
+			size = 10
 		}
 	}
 	t.data.players = 0
