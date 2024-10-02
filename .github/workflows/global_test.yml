@@ -1,4 +1,4 @@
-name: Run Server and Test
+name: Общий тест
 
 on: [push]
 
