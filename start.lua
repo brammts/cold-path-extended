@@ -21,7 +21,7 @@ network.start(true)
 local ok, err = pcall(function()
 	while not server_is_off do
 		network.update()
-		sleep(0.01)
+		sleep(0.05)
 	end
 end)
 
