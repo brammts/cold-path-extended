@@ -1,5 +1,6 @@
 # Cold Path Extended
-[![Общий тест](https://github.com/brammts/cold-path-extended/actions/workflows/global_test.yml/badge.svg)](https://github.com/brammts/cold-path-extended/actions/workflows/global_test.yml)
+[![Общий тест](https://github.com/brammts/cold-path-extended/actions/workflows/global_test.yml/badge.svg)](https://github.com/brammts/cold-path-extended/actions/workflows/global_test.yml) 
+![Latest Version](https://img.shields.io/github/v/tag/brammts/cold-path-extended?sort=semver&label=version)
 
 **Cold Path Extended** — это сборка игрового сервера Cold Path, имеющая более совершенную техническую базу, чем у оригинальной, и более подробную документацию на русском языке.
 

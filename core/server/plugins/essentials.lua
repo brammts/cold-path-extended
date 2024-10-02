@@ -348,7 +348,7 @@ function M.init(_api)
     api.register_command("/info", get_info)
     api.register_command("/role", role)
     api.register_command("/history", history)
-    game_data.difficulty = server_settings.plugin.difficulty or "standard"
+    game_data.difficulty = server_settings.difficulty or "standard"
 end
 
 function M.verify_registration(client, client_data)
@@ -395,18 +395,6 @@ function M.on_player_registered(client)
     db:save()
     if check_admin(cl_data.uuid) then
         api.call_function("set_permissions_group", client, "admin")
-    end
-end
-
-function M.on_player_joined(client)
-    if server_settings.plugin.welcome ~= "" then
-        local t = {
-            type = "server_event",
-            data = {
-                text = server_settings.plugin.welcome
-            }
-        }
-        api.send_data(to_json(t), client)
     end
 end
 

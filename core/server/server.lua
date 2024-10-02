@@ -33,7 +33,16 @@ local clients_ready = {}
 local preferred_civs = {} -- UUID: civilization
 
 local function get_server_info()
-	local t = deepcopy(server_settings.server_info)
+	local t = {
+		type = "server_info",
+		data = {
+			name = server_settings.name,
+			players = server_settings.players,
+			ip = "",
+			port = server_settings.port,
+			size = 1
+		}
+	}
 	t.data.players = 0
 	for k, v in pairs(clients_data) do
 		if clients_data[k].state and clients_data[k].state == "in_game" then
