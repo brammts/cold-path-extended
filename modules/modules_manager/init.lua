@@ -4,7 +4,12 @@ local M = {}
 -- chat_function(message_text, just_for_host, client)
 -- kick_function(client, reason)
 
-local plugins_list = {}
+local plugins_list = {
+	lands_manager = {
+		data = require "modules.lands_manager.init",
+		order = 1
+	}
+}
 
 local plugins_data = {}
 local plugins_function = {}

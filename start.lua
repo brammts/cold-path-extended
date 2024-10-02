@@ -1,7 +1,7 @@
 require "environment"
 
 local validate_scenario = require "scripts.validate_scenario"
-original_game_data = require "scripts.scenarios.euro.std"
+original_game_data = require "content.maps.euro.scenarios.std"
 game_data = deepcopy(original_game_data)
 
 debug_log("Start server:", true)
