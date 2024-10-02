@@ -1,0 +1,1 @@
+[![Общий тест](https://github.com/brammts/cold-path-extended/actions/workflows/global_test.yml/badge.svg)](https://github.com/brammts/cold-path-extended/actions/workflows/global_test.yml)
