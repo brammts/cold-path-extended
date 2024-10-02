@@ -1,4 +1,4 @@
-name: Общий тест
+name: Тест
 
 on: [push]
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: Run server
         run: |
-          docker run -d --name my-server ${{ secrets.DOCKER_USERNAME }}/my-server:latest
+          docker run -dT --name my-server ${{ secrets.DOCKER_USERNAME }}/my-server:latest
 
       - name: Wait for server to start
         run: |
@@ -32,6 +32,7 @@ jobs:
       - name: Check server status
         run: |
           docker container ls -a --filter name=my-server
+          echo "Container status: $?"
           if [ $? -eq 0 ]; then
             echo "Server started successfully"
             exit 0
@@ -42,9 +43,9 @@ jobs:
 
       - name: Set test status
         if: success()
+        run: |
+          echo "Пройден" > /tmp/test-result
         uses: actions/upload-artifact@v3
         with:
           name: test-result
           path: /tmp/test-result
-        env:
-          TEST_RESULT: "Исправен"
