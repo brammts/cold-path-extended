@@ -16,53 +16,55 @@ local banned_ip_file_path = "banned_ip.dat"
 local muted = {}
 
 local function clear_old_records(file_path)
-    local t = {}
-    for line in io.lines(file_path) do
-        local b = lume.split(line)
-        t[b[1]] = b
-    end
-    local file = io.open(file_path, "w")
-    if file then
-        for k, v in pairs(t) do
-            if tonumber(v[2]) > socket.gettime() then
-                file:write(k .. " " .. join(v, " ", 2) .. "\n")
-            end
-        end
-        file:close()
-    end
+    -- local t = {}
+    -- for line in io.lines(file_path) do
+    --     local b = lume.split(line)
+    --     t[b[1]] = b
+    -- end
+    -- local file = io.open(file_path, "w")
+    -- if file then
+    --     for k, v in pairs(t) do
+    --         if tonumber(v[2]) > socket.gettime() then
+    --             file:write(k .. " " .. join(v, " ", 2) .. "\n")
+    --         end
+    --     end
+    --     file:close()
+    -- end
 end
 
 local function check_ban(uuid, ip, unique_id)
-    clear_old_records(banned_ip_file_path)
+    -- clear_old_records(banned_ip_file_path)
 
-    for key, value in pairs(db.banned) do
-        -- pprint(value, socket.gettime())
-        if value.ban_time < socket.gettime() then
-            db.banned[key] = nil
-        elseif value.uuid == uuid or value.unique_id == unique_id then
-            return value.ban_time, value.reason
-        end
-    end
+    -- for key, value in pairs(db.banned) do
+    --     -- pprint(value, socket.gettime())
+    --     if value.ban_time < socket.gettime() then
+    --         db.banned[key] = nil
+    --     elseif value.uuid == uuid or value.unique_id == unique_id then
+    --         return value.ban_time, value.reason
+    --     end
+    -- end
 
-    for line in io.lines(banned_ip_file_path) do
-        local b = lume.split(line)
-        if ip == b[1] then
-            local reason = ""
-            if b[3] then
-                reason = join(b, " ", 3)
-            end
-            return b[2], reason
-        end
-    end
+    -- for line in io.lines(banned_ip_file_path) do
+    --     local b = lume.split(line)
+    --     if ip == b[1] then
+    --         local reason = ""
+    --         if b[3] then
+    --             reason = join(b, " ", 3)
+    --         end
+    --         return b[2], reason
+    --     end
+    -- end
+    -- return false
     return false
 end
 
 local function check_admin(uuid)
-    for line in io.lines(admins_file_path) do
-        if line == uuid then
-            return true
-        end
-    end
+    -- for line in io.lines(admins_file_path) do
+    --     if line == uuid then
+    --         return true
+    --     end
+    -- end
+    -- return false
     return false
 end
 
